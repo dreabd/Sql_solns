@@ -22,8 +22,8 @@ CREATE TABLE supplies(
 
 CREATE TABLE teacher_supplies(
   id Integer Primary Key AUTOINCREMENT,
-  teacher_id INTEGER,
-  supply_id INTEGER,
+  teacher_id INTEGER REFERENCES teachers(id) ON DELETE CASCADE,
+  supply_id INTEGER REFERENCES supplies(id) ON DELETE CASCADE,
   quantity INTEGER DEFAULT(5)
 );
 
