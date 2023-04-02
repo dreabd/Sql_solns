@@ -25,15 +25,22 @@ WHERE supplies.name = "Duct Tape";
 -- Should return Mickey Mouse
 
 -- Get rid of the whiteboard markers and tissues of teachers who make more than 50000
-SELECT * from teacher_supplies;
+SELECT * FROM teacher_supplies;
 
-.
+DELETE FROM teacher_supplies
+WHERE supply_id IN (
+    SELECT supplies.id
+    FROM supplies
+    WHERE supplies.name = "Whiteboard Markers" OR supplies.name = "Tissues"
+) AND teacher_id IN (
+    SELECT teachers.id
+    FROM teachers
+    WHERE teachers.salary > 50000 
+);
 
-SELECT teachers.first_name, teachers.last_name, teachers.salary, supplies.name
-FROM teacher_supplies
-JOIN teachers ON (teachers.id = teacher_supplies.teacher_id)
-JOIN supplies ON (supplies.id = teacher_supplies.supply_id)
-WHERE supplies.name = "Whiteboard Markers" OR supplies.name = "Tissues";
+SELECT * FROM teacher_supplies;
+
+
 -- This one is a struggle
 
 -- Update Mickey and Minnie's marraige status to false
